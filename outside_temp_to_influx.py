@@ -2,22 +2,22 @@
 import requests, json, os 
 from influxdb import InfluxDBClient
 
-API_KEY='a301dc655425b65ce89ae14cc64cf915'
-CITY_NAME='Hemel Hempstead'
-BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
+OPEN_WEATHER_API_KEY=''
+OPEN_WEATHER_CITY_NAME=''
+BASE_URL = ''
 INFLUX_URL=''
 INFLUX_USERNAME=''
 INFLUX_PASSWORD=''
 INFLUX_DATABASE=''
 
 client = InfluxDBClient(host=INFLUX_URL, port=8086, username=INFLUX_USERNAME, password=INFLUX_PASSWORD)
-client.switch_database('INFLUX_DATABASE')
+client.switch_database(INFLUX_DATABASE)
 
-complete_url = BASE_URL + "appid=" + API_KEY + "&q=" + CITY_NAME + "&units=metric"
+complete_url = BASE_URL + "appid=" + OPEN_WEATHER_API_KEY + "&q=" + OPEN_WEATHER_CITY_NAME + "&units=metric"
 
 response = requests.get(complete_url).json()
 
-if response["cod"] != "404": 
+if response["cod"] == 200: 
     data = response["main"] 
   
     current_temperature = data["temp"] 

@@ -1,15 +1,12 @@
 #!/usr/bin/env python
-import time 
-import smbus2
-import bme280
+import time, smbus2, bme280
 from influxdb import InfluxDBClient
-# --------- User Settings ---------
+
 INFLUX_URL=''
 INFLUX_USERNAME=''
 INFLUX_PASSWORD=''
 INFLUX_DATABASE=''
 MINUTES_BETWEEN_READS = 3
-# ---------------------------------
 
 # Influx
 client = InfluxDBClient(host=INFLUX_URL, port=8086, username=INFLUX_USERNAME, password=INFLUX_PASSWORD)
@@ -38,5 +35,5 @@ json_body = [
         "pressure": float(pressure)
     }
   }
-  ]
+]
 client.write_points(json_body)
