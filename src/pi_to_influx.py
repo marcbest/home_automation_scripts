@@ -1,16 +1,23 @@
 #!/usr/bin/env python
-import time, smbus2, bme280
+import os
+
+import smbus2, bme280
 from influxdb import InfluxDBClient
 
-INFLUX_URL=''
-INFLUX_USERNAME=''
-INFLUX_PASSWORD=''
-INFLUX_DATABASE=''
+INFLUX_URL = os.environ.get('INFLUX_URL')
+INFLUX_PORT = os.environ.get('INFLUX_PORT')
+INFLUX_USERNAME = os.environ.get('INFLUX_USERNAME')
+INFLUX_PASSWORD = os.environ.get('INFLUX_PASSWORD')
+INFLUX_DATABASE = os.environ.get('INFLUX_DATABASE')
+
 MINUTES_BETWEEN_READS = 3
 
 # Influx
-client = InfluxDBClient(host=INFLUX_URL, port=8086, username=INFLUX_USERNAME, password=INFLUX_PASSWORD)
-client.switch_database(INFLUX_DATABASE)
+try:
+    client = InfluxDBClient(host=INFLUX_URL, port=INFLUX_PORT, username=INFLUX_USERNAME, password=INFLUX_PASSWORD)
+    client.switch_database(INFLUX_DATABASE)
+except Exception:
+    raise
 
 # BME280 settings 
 port = 1
@@ -36,4 +43,5 @@ json_body = [
     }
   }
 ]
+
 client.write_points(json_body)
