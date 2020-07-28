@@ -1,5 +1,5 @@
-#!/usr/src/env python
-import time, smbus2, bme280
+#!/usr/bin/env python
+import smbus2, bme280
 from influxdb import InfluxDBClient
 
 INFLUX_URL=''

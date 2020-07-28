@@ -1,5 +1,5 @@
-#!/usr/src/env python3
-import requests, json, os 
+#!/usr/bin/env python3
+import requests
 from influxdb import InfluxDBClient
 
 OPEN_WEATHER_API_KEY=''
