@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/src/env python3
 import requests, json, os 
 from influxdb import InfluxDBClient
 

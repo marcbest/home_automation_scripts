@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/src/env python
 import time, smbus2, bme280
 from influxdb import InfluxDBClient
 
